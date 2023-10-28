@@ -18,7 +18,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-// Edit an existing blog post
+// Edit blog post
 router.put("/:id", withAuth, async (req, res) => {
   try {
     // Update the blog post based on the provided ID

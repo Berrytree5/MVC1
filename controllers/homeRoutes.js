@@ -148,7 +148,7 @@ router.get("/create/:id", async (req, res) => {
 
 // Redirect to the login page
 router.all("/login", (req, res) => {
-  // If the user is already logged in
+  
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;

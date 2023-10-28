@@ -24,7 +24,7 @@ Comment.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-// A comment belongs to a blog post, and a blog post can have many comments
+
 Comment.belongsTo(BlogPost, {
   foreignKey: "blogPost_id",
   onDelete: "CASCADE",

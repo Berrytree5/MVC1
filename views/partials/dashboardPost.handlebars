@@ -1,13 +1,29 @@
+{{!-- User Dashboard Page --}}
+<div class="user-info">
+    <h2 class="user-name">{{name}}'s Blog</h2>
+</div>
 
-
-{{#each blogPosts}}
-  <div class="post">
-    <h2>{{Tech Blog}}</h2>
-    <p>{{description}}</p>
-    <p class="date">Posted on {{formatDate date_created}}</p>
-    <div class="actions">
-      <button class="edit-button" data-id="{{id}}">Edit</button>
-      <button class="delete-button" data-id="{{id}}">Delete</button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-5">
+            {{#if blogPosts.length}}
+                {{#each blogPosts as |post|}}
+                    {{> userBlogPost post}}
+                    <br>
+                {{/each}}
+            {{else}}
+                <p>This user hasn't published any posts yet.</p>
+            {{/if}}
+        </div>
     </div>
-  </div>
-{{/each}}
+</div>
+
+{{#if (isUserOwnPage user.id userId)}}
+<div class="container">
+    <div class="row text-center">
+        <a href="/create"><button class="btn btn-dark mt-3">Create a new post</button></a>
+    </div>
+</div>
+{{/if}}
+
+<script src="/js/dashboard.js"></script>
