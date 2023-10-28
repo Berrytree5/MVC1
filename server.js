@@ -4,9 +4,9 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const helpers = require("./utils/helpers");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const dotenv = require("dotenv"); 
+const dotenv = require("dotenv");
 
-dotenv.config(); // Load environment variables from a .env file
+dotenv.config();
 
 const sequelize = require("./config/connection");
 const routes = require("./controllers");
@@ -31,7 +31,6 @@ app.use(express.static('utils'));
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    // Session expires
     expires: 10 * 60 * 1000,
     secure: false,
     httpOnly: true,
@@ -46,7 +45,9 @@ app.use(session(sess));
 // Routes
 app.use(routes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// Sync Sequelize and drop/recreate tables 
+sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
 });
