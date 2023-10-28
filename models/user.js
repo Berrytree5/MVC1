@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 const bcrypt = require("bcryptjs");
 
 class User extends Model {
-  // Method to check if a password matches the hashed password in the database
+  // Method to check if a password mat
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
@@ -39,7 +39,7 @@ User.init(
     },
   },
   {
-    // Hooks to hash passwords before creating and updating
+    // Checks passwords before creating and updating
     hooks: {
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);

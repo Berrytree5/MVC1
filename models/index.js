@@ -2,7 +2,7 @@ const User = require("./user");
 const BlogPost = require("./blogPost");
 const Comment = require("./comment");
 
-// Set up relationships between tables 
+
 
 // A user can have many blog posts, and a blog post belongs to a user
 User.hasMany(BlogPost, {

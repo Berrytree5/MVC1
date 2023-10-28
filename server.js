@@ -1,7 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-const SequelizeStore = require("connect-session-sequelize");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -27,7 +27,7 @@ app.use(express.static('utils'));
 
 // Configure and use sessions
 const sess = {
-  secret: process.env.SECRET,
+  secret: 'longrandompass3431',
   cookie: {
     expires: 10 * 60 * 1000,
     secure: false,
