@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!--CSS styles here -->
+    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+</head>
+<body>
+    <!-- navigation menu here -->
+    <nav>
+        <ul>
+            <li><a href="../public/js/dashboard.js">Dashboard</a></li>
+            <li><a href="../public/js/login.js">Login</a></li>
+            <li><a href="../public/js/logout.js">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Welcome to Your Blog</h1>
+
+    <h2>Recent Blog Posts</h2>
+    {{#if blogPosts.length}}
+    <ul>
+        {{#each blogPosts}}
+        <li>
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <a href="/blogPost/{{id}}">Read more</a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No blog posts available.</p>
+    {{/if}}
+
+    
+    <script src="../public/js/dashboard.js"></script>
+</body>
+</html>

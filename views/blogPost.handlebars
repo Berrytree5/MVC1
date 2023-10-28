@@ -1,0 +1,28 @@
+
+
+<div class="blog-post">
+  <h1>{{blogPost.title}}</h1>
+  <p>{{blogPost.description}}</p>
+  <p class="date">Posted on {{formatDate blogPost.date_created}}</p>
+</div>
+
+<div class="comments">
+  <h2>Comments</h2>
+  {{#each blogPost.comments}}
+    <div class="comment">
+      <p>{{comment_body}}</p>
+      <p class="comment-date">Posted by {{user.name}} on {{formatDate date_created}}</p>
+    </div>
+  {{/each}}
+</div>
+
+{{#if session.logged_in}}
+  <div class="add-comment">
+    <form id="comment-form">
+      <textarea id="comment" placeholder="Add a comment..."></textarea>
+      <button type="submit">Submit Comment</button>
+    </form>
+  </div>
+{{else}}
+  <p class="login-required">Login to leave a comment.</p>
+{{/if}}

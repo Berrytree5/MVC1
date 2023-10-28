@@ -1,10 +1,9 @@
-// Imports
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class BlogPost extends Model {}
 
-// BlogPost Table Model
+// Define the BlogPost model
 BlogPost.init(
   {
     id: {
@@ -35,12 +34,12 @@ BlogPost.init(
   },
   {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "blogPost",
+    timestamps: false, // Disable timestamps (created_at, updated_at)
+    freezeTableName: true, // Use the model name as the table name
+    underscored: true, // Use underscored names for fields (e.g., date_created)
+    modelName: "blogPost", // Set the model name
   }
 );
 
-// Export
+// Export the BlogPost model
 module.exports = BlogPost;

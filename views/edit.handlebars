@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog Post</title>
+    <!-- Include your CSS styles here -->
+    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+</head>
+<body>
+    <!-- Include your navigation menu here -->
+    <nav>
+        <ul>
+            <li><a href="../public/js/dashboard.js">Dashboard</a></li>
+            <li><a href="../public/js/logout.js">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Edit Blog Post</h1>
+
+    <form id="editBlogPostForm">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="{{blogPost.title}}">
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description">{{blogPost.description}}</textarea>
+        </div>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <!-- Include your JavaScript for edit functionality -->
+    <script src="../public/js/editPost.js"></script>
+</body>
+</html>

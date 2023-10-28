@@ -1,0 +1,27 @@
+[
+  {
+    "title": "The Art of Coding",
+    "description": "Learn about the creative process behind coding and software development.",
+    "user_id": 1
+  },
+  {
+    "title": "Exploring AI and Machine Learning",
+    "description": "Discover the exciting world of artificial intelligence and machine learning.",
+    "user_id": 2
+  },
+  {
+    "title": "Web Development Best Practices",
+    "description": "Explore the essential best practices for web development and design.",
+    "user_id": 3
+  },
+  {
+    "title": "The Future of Technology",
+    "description": "Take a glimpse into the future of technology and its potential impact on society.",
+    "user_id": 4
+  },
+  {
+    "title": "Cybersecurity Essentials",
+    "description": "Learn about the fundamental concepts of cybersecurity and data protection.",
+    "user_id": 5
+  }
+]

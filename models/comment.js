@@ -1,10 +1,9 @@
-// Imports
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class Comment extends Model {}
 
-// Comment Table Model
+// Define the Comment model
 Comment.init(
   {
     id: {
@@ -39,12 +38,12 @@ Comment.init(
   },
   {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "comment",
+    timestamps: false, // Disable timestamps (created_at, updated_at)
+    freezeTableName: true, // Use the model name as the table name
+    underscored: true, // Use underscored names for fields
+    modelName: "comment", // Set the model name
   }
 );
 
-// Export
+// Export the Comment model
 module.exports = Comment;

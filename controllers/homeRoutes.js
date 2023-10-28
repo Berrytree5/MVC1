@@ -1,11 +1,11 @@
-// Imports
 const router = require("express").Router();
 const { BlogPost, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
+// Route to display the homepage
 router.get("/", async (req, res) => {
   try {
-    // Get all blogPosts and JOIN with user data and comment data
+    // Fetch all blog posts 
     const blogPostData = await BlogPost.findAll({
       include: [
         {
@@ -19,27 +19,27 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    // Serialize data so the template can read it
+    // Serialize data 
     const blogPosts = blogPostData.map((blogPost) =>
       blogPost.get({ plain: true })
     );
 
-    // Pass serialized data and session flag into template
+    // Render the homepage 
     res.render("homepage", {
       blogPosts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
-// Route set up to find single blog post and render blogPost page
+// Route to display post
 router.get("/blogPost/:id", withAuth, async (req, res) => {
   try {
+    
     const blogPostData = await BlogPost.findByPk(req.params.id, {
-      // Join user data and comment data with blog post data
       include: [
         {
           model: User,
@@ -53,8 +53,8 @@ router.get("/blogPost/:id", withAuth, async (req, res) => {
     });
 
     const blogPost = blogPostData.get({ plain: true });
-    console.log(blogPost);
 
+    // Render the blog post template with data
     res.render("blogPost", {
       ...blogPost,
       logged_in: req.session.logged_in,
@@ -65,14 +65,12 @@ router.get("/blogPost/:id", withAuth, async (req, res) => {
   }
 });
 
-// route to allow logged in user access to the dashboard page
-// Use withAuth middleware to prevent access to route
+// Route to display the dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+    // Fetch user data and join user's blog posts and comments
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
-      // Join user blog post and comment data with user data
       include: [
         {
           model: BlogPost,
@@ -85,8 +83,8 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    console.log(user)
 
+    // Render the dashboard template with user data
     res.render("dashboard", {
       ...user,
       logged_in: true,
@@ -96,7 +94,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-// NEW POST PAGE: Renders 'create.handlebars'; redirects to /login if not logged in
 router.get("/create", async (req, res) => {
   try {
     if (req.session.logged_in) {
@@ -109,16 +106,16 @@ router.get("/create", async (req, res) => {
       res.redirect("/login");
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
-// Route set up to be able to edit an existing blog post
+// Route to edit post
 router.get("/create/:id", async (req, res) => {
   try {
+    // Fetch a blog post by ID and join user and comment data
     const blogPostData = await BlogPost.findByPk(req.params.id, {
-      // Join user data and comment data with blog post data
       include: [
         {
           model: User,
@@ -132,7 +129,6 @@ router.get("/create/:id", async (req, res) => {
     });
 
     const blogPost = blogPostData.get({ plain: true });
-    console.log(blogPost);
 
     if (req.session.logged_in) {
       res.render("edit", {
@@ -145,13 +141,14 @@ router.get("/create/:id", async (req, res) => {
       res.redirect("/login");
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
+// Redirect to the login page
 router.all("/login", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
+  // If the user is already logged in
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
@@ -160,5 +157,4 @@ router.all("/login", (req, res) => {
   res.render("login");
 });
 
-// Export
 module.exports = router;

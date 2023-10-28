@@ -1,11 +1,12 @@
-// Imports
 const router = require("express").Router();
 const { BlogPost, Comment, User } = require("../../models");
 
 // CREATE Comment
 router.post("/", async (req, res) => {
   try {
-    console.log("we made it");
+    console.log("Creating a new comment");
+
+    // Create a new comment
     const comment = await Comment.create({
       comment_body: req.body.comment_body,
       blogPost_id: req.body.blogPost_id,
@@ -22,6 +23,9 @@ router.post("/", async (req, res) => {
 // READ all Comments
 router.get("/", async (req, res) => {
   try {
+    console.log("Retrieving all comments");
+
+    // Retrieve all comments with associated user and blog post details
     const commentData = await Comment.findAll({
       include: [
         {
@@ -34,6 +38,7 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+
     res.status(200).json(commentData);
   } catch (err) {
     res.status(500).json(err);
@@ -43,6 +48,9 @@ router.get("/", async (req, res) => {
 // UPDATE Comment
 router.put("/:id", async (req, res) => {
   try {
+    console.log("Updating a comment");
+
+    // Update a comment based on the provided ID
     const updatedComment = await Comment.update(req.body, {
       where: {
         id: req.params.id,
@@ -65,20 +73,24 @@ router.put("/:id", async (req, res) => {
 // DELETE Comment
 router.delete("/:id", async (req, res) => {
   try {
+    console.log("Deleting a comment");
+
+    // Delete a comment based on the provided ID
     const comment = await Comment.destroy({
       where: {
         id: req.params.id,
       },
     });
+
     if (!comment) {
       res.status(404).json({ message: "No comment found with that id!" });
       return;
     }
+
     res.status(200).json(comment);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Exports
 module.exports = router;

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../public/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to Your Dashboard</h1>
+    <div id="user-info">
+      <p>User Name: {{ user.name }}</p>
+      <p>Email: {{ user.email }}</p>
+    </div>
+  </header>
+  <main>
+    <section id="blog-posts">
+      <h2>Your Blog Posts</h2>
+      {{#if blogPosts.length}}
+        <ul>
+          {{#each blogPosts}}
+            <li>
+              <h3>{{ title }}</h3>
+              <p>{{ description }}</p>
+              <a href="../public/js/newComment.js id }}">Edit</a>
+              <button data-id="{{ id }}" class="delete-post">Delete</button>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p>You haven't created any blog posts yet.</p>
+      {{/if}}
+    </section>
+  </main>
+  <footer>
+    <a href="../public/js/newPostHandler.js">Create a New Blog Post</a>
+    <a href="../public/js/logout.js">Logout</a>
+  </footer>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,12 +1,11 @@
-// Imports
 const router = require("express").Router();
 const { BlogPost } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// Route to create a new blog post
+// Create a new blog post
 router.post("/", withAuth, async (req, res) => {
-  console.log(req.body);
   try {
+    // Create a new blog post with the user's ID
     const newBlogPost = await BlogPost.create({
       ...req.body,
       user_id: req.session.user_id,
@@ -14,52 +13,53 @@ router.post("/", withAuth, async (req, res) => {
 
     res.status(200).json(newBlogPost);
   } catch (err) {
-    console.log(err)
+    console.error(err);
     res.status(400).json(err);
   }
 });
 
-// Route to edit an existing blog post
+// Edit an existing blog post
 router.put("/:id", withAuth, async (req, res) => {
-  console.log(req.body);
   try {
-    const blogPostData = await BlogPost.update(req.body, {
+    // Update the blog post based on the provided ID
+    const [rowsUpdated] = await BlogPost.update(req.body, {
       where: {
         id: req.params.id,
       },
     });
 
-    if (!blogPostData) {
+    if (rowsUpdated === 0) {
       res.status(404).json({ message: "No blog post found with this id!" });
       return;
     }
 
-    res.status(200).json(blogPostData);
+    res.status(200).json({ message: "Blog post updated successfully" });
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
-// Route to delete an existing blog post
+// Delete an existing blog post
 router.delete("/:id", withAuth, async (req, res) => {
-  console.log(req.params.id);
   try {
-    const blogPostData = await BlogPost.destroy({
+    // Delete the blog post based on the provided ID
+    const rowsDeleted = await BlogPost.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    if (!blogPostData) {
+    if (rowsDeleted === 0) {
       res.status(404).json({ message: "No blog post found with this id!" });
       return;
     }
 
-    res.status(200).json(blogPostData);
+    res.status(200).json({ message: "Blog post deleted successfully" });
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
-// Exports
 module.exports = router;

@@ -1,0 +1,13 @@
+
+
+{{#each blogPosts}}
+  <div class="post">
+    <h2>{{Tech Blog}}</h2>
+    <p>{{description}}</p>
+    <p class="date">Posted on {{formatDate date_created}}</p>
+    <div class="actions">
+      <button class="edit-button" data-id="{{id}}">Edit</button>
+      <button class="delete-button" data-id="{{id}}">Delete</button>
+    </div>
+  </div>
+{{/each}}
