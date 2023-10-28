@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const exphbs = require("express-handlebars");
 const path = require("path");
 const SequelizeStore = require("connect-session-sequelize");
 const dotenv = require("dotenv");
@@ -21,7 +20,6 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.engine("handlebars" , exphbs());
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
