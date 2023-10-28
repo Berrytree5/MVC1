@@ -28,7 +28,7 @@ app.use(express.static('utils'));
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    // Session expires after 10 minutes
+    // Session expires 
     expires: 10 * 60 * 1000,
     secure: false,
     httpOnly: true,
