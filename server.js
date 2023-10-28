@@ -3,7 +3,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const path = require("path");
 const helpers = require("./utils/helpers");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const SequelizeStore = require("connect-session-sequelize");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -15,9 +15,19 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Set up Handlebars
-const hbs = exphbs.create({ helpers });
-app.engine("handlebars", hbs.engine);
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main", // Specify the main layout template
+    extname: ".handlebars", // Use .handlebars as the file extension
+    layoutsDir: path.join(__dirname, "views/layouts"), // Specify the layouts directory
+    partialsDir: path.join(__dirname, "views/partials"), // Specify the partials directory
+  })
+);
 app.set("view engine", "handlebars");
+
+// Specify the location of your HTML templates
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware
 app.use(express.json());
@@ -41,9 +51,6 @@ const sess = {
   store: new SequelizeStore({ db: sequelize }),
 };
 app.use(session(sess));
-
-// Routes
-app.use(routes);
 
 // Sync Sequelize and drop/recreate tables 
 sequelize.sync({ force: true }).then(() => {
