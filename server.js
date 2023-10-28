@@ -4,6 +4,9 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const helpers = require("./utils/helpers");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const dotenv = require("dotenv"); 
+
+dotenv.config(); // Load environment variables from a .env file
 
 const sequelize = require("./config/connection");
 const routes = require("./controllers");
@@ -28,7 +31,7 @@ app.use(express.static('utils'));
 const sess = {
   secret: process.env.SECRET,
   cookie: {
-    // Session expires 
+    // Session expires
     expires: 10 * 60 * 1000,
     secure: false,
     httpOnly: true,
