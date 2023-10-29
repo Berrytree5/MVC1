@@ -4,11 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <!--CSS styles here -->
-    <link rel="stylesheet" type="text/css" href="../public/css/styles.css">
+    {{! views/homepage.handlebars }}
+
+{{#extend "main"}}
+    {{#section "title"}}Your Blog Application{{/section}}
+    {{#section "content"}}
+        <div class="container">
+            <h2>MVC Tech Blog</h2>
+            <p>Welcome to our MVC Tech Blog. Check out the latest posts!</p>
+        </div>
+    {{/section}}
+{{/extend}}
+
+{{#section "styles"}}
+<style>
+   
+    .container {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    p {
+        color: #666;
+    }
+</style>
+{{/section}}
+
+   
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-    <!-- navigation menu here -->
     <nav>
         <ul>
             <li><a href="/js/dashboard.js">Dashboard</a></li>

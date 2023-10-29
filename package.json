@@ -30,6 +30,7 @@
     "fs.realpath": "^1.0.0",
     "gauge": "^3.0.2",
     "glob": "^7.2.3",
+    "handlebars": "^4.7.8",
     "has-unicode": "^2.0.1",
     "https-proxy-agent": "^5.0.1",
     "inflight": "^1.0.6",
