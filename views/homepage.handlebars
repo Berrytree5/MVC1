@@ -6,17 +6,13 @@
     <title>Home Page</title>
     {{! views/homepage.handlebars }}
 
-{{#extend "main"}}
-    {{#section "title"}}Your Blog Application{{/section}}
-    {{#section "content"}}
         <div class="container">
             <h2>MVC Tech Blog</h2>
             <p>Welcome to our MVC Tech Blog. Check out the latest posts!</p>
         </div>
-    {{/section}}
-{{/extend}}
+    
 
-{{#section "styles"}}
+
 <style>
    
     .container {
@@ -35,11 +31,11 @@
         color: #666;
     }
 </style>
-{{/section}}
 
    
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
+
 <body>
     <nav>
         <ul>

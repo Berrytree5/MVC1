@@ -1,14 +1,14 @@
 
 
 <div class="blog-post">
-  <h1>{{blogPost.title}}</h1>
-  <p>{{blogPost.description}}</p>
-  <p class="date">Posted on {{formatDate blogPost.date_created}}</p>
+  <h1>{{title}}</h1>
+  <p>{{description}}</p>
+  <p class="date">Posted on {{formatDate date_created}}</p>
 </div>
 
 <div class="comments">
   <h2>Comments</h2>
-  {{#each blogPost.comments}}
+  {{#each comments}}
     <div class="comment">
       <p>{{comment_body}}</p>
       <p class="comment-date">Posted by {{user.name}} on {{formatDate date_created}}</p>
