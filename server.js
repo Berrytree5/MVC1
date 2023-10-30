@@ -12,7 +12,7 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up Handlebars.js engine with custom helpers
+// Set up Handlebars.js 
 const hbs = exphbs.create({ helpers });
 
 // Define session cookie properties
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public"))); // Serve static files f
 app.use(routes); // Use the defined routes
 
 // Synchronize Sequelize with the database
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({  }).then(() => {
   app.listen(PORT, () => {
     console.log("Server is now listening on port " + PORT);
   });
